@@ -34,11 +34,15 @@ router.on('before', (event) => {
 createInertiaApp({
   resolve: name => {
     const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+    
+    // Registrar todos los componentes disponibles en la consola
+    console.log('Componentes disponibles:', Object.keys(pages));
+    
     let page = pages[`./Pages/${name}.vue`]
     
     if (!page) {
       console.error(`No se encontró el componente: ./Pages/${name}.vue`)
-      console.log('Componentes disponibles:', Object.keys(pages))
+      console.log('Buscando en:', `./Pages/${name}.vue`)
       return
     }
     
